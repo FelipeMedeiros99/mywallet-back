@@ -7,21 +7,19 @@ import Joi from "joi"
 
 import db from "./banco.js"
 
-import { novoUsuarioSchema } from "./schemas.js"
+import novoUsuarioRouter from "./routes/novo-usuario-router.js"
 
-dotenv.config()
+dotenv.config();
 
 //definição de variáveis
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 
 //Configuração do servidor
-const app = express()
-app.use(cors())
-app.use(json())
+const app = express();
+app.use(cors());
+app.use(json());
 
-app.post("/novo-usuario", async (req, res)=>{
-    
-})
+app.use(novoUsuarioRouter);
 
 
-app.listen(PORT, ()=>console.log(chalk.green("servidor funcionando")))
+app.listen(PORT, ()=>console.log(chalk.green("servidor funcionando")));
