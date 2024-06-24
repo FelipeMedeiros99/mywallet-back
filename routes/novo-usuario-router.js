@@ -1,10 +1,10 @@
-import { Router } from "express"
+import { Router } from "express";
 
-import { novoUsuarioPost } from "../controllers/novo-usuario-controller.js"
+import { novoUsuarioPost } from "../controllers/novo-usuario-controller.js";
+import emailJaCadastradoMiddleware from "../middlewares/emailJaCadastradoMiddleware.js";
 
 
-const novoUsuarioRouter = Router()
+const novoUsuarioRouter = Router();
 
-novoUsuarioRouter.post("/novo-usuario", novoUsuarioPost)
-
-export default novoUsuarioRouter
+novoUsuarioRouter.post("/novo-usuario", emailJaCadastradoMiddleware, novoUsuarioPost);
+export default novoUsuarioRouter;

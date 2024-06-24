@@ -19,6 +19,7 @@ const app = express();
 app.use(cors());
 app.use(json());
 
+// rotas
 app.use(novoUsuarioRouter);
 
 
