@@ -6,9 +6,9 @@ dotenv.config();
 
 let db;
 
+// Configuração do banco
 const mongoClient = new MongoClient(process.env.BANCO);
 try{
-
     await mongoClient.connect();
     db = mongoClient.db("meu-banco")
     console.log(chalk.green("Banco de dados conectado"))

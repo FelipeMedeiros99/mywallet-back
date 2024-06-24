@@ -8,7 +8,7 @@ export const novoUsuarioSchema = Joi.object({
 })
 
 export const usuarioSchema = Joi.object({
-    "Email": Joi.string().email().required(),
-    "Senha": Joi.string().min(6)
+    "E-mail": Joi.string().email().required(),
+    "Senha": Joi.string().min(6).required()
 })
 
