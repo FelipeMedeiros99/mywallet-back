@@ -3,6 +3,7 @@ import express, { json } from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 
+import db from "./banco.js"
 
 dotenv.config()
 
@@ -13,6 +14,8 @@ const PORT = process.env.PORT
 const app = express()
 app.use(cors())
 app.use(json())
+
+
 
 
 app.listen(PORT, ()=>console.log(chalk.green("servidor funcionando")))
