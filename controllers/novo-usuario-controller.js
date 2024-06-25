@@ -14,7 +14,7 @@ export async function novoUsuarioPostController(req, res){
         await novoUsuarioSchema.validateAsync(dados, {abortEarly: false});
         const senha = await bcrypt.hash(dados.Senha, 10);
         delete dados.Confirmar 
-        await db.collection("mywallet-usuarios").insertOne({...dados, "Senha": senha});
+        await db.collection("mywallet-usuarios").insertOne({...dados, "Senha": senha, Saldo: 0, Entradas: [], Saidas: []});
         console.log("usuario cadastrado com sucesso");
         return res.sendStatus(200);
 
