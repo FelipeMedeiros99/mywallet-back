@@ -7,10 +7,6 @@ import novoUsuarioRouter from "./routes/novo-usuario-router.js"
 import loginRouter from "./routes/login-router.js"
 
 
-// TODO: VALIDAÇÕES DE LOGIN
-// TODO: CRIAÇÃO DE TOKEN PARA USUÁRIO ONLINE
-
-
 dotenv.config();
 
 //definição de variáveis

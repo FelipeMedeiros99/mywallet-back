@@ -12,7 +12,7 @@ export async function novoUsuarioPost(req, res){
         
         const senha = await bcrypt.hash(dados.Senha, 10);
         
-        await db.collection("usuarios").insertOne({...dados, "Senha": senha});
+        await db.collection("mywallet-usuarios").insertOne({...dados, "Senha": senha});
         console.log("usuario cadastrado com sucesso");
         return res.sendStatus(200);
 
