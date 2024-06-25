@@ -22,6 +22,7 @@ export async function usuarioExisteMiddleware(req, res, next){
         if(dadosUsuarioBanco === null){
             return res.status(401).send("Usuário não encontrado");
         }         
+        console.log("usuario encontrado")
         next();
 
     }catch(e){
@@ -47,6 +48,7 @@ export async function senhaConfereMiddleware(req, res, next){
             return res.status(401).send("Senha incorreta");
         }
         // caso esteja correto, segue para o próximo middleware
+        console.log("senha aceita")
         next();
 
     }catch(e){

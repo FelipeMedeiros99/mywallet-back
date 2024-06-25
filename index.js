@@ -5,6 +5,7 @@ import cors from "cors"
 
 import novoUsuarioRouter from "./routes/novo-usuario-router.js"
 import loginRouter from "./routes/login-router.js"
+import controleLogout from "./utils/controleLogout.js"
 
 
 dotenv.config();
@@ -21,5 +22,8 @@ app.use(json());
 app.use(novoUsuarioRouter);
 app.use(loginRouter)
 
+
+// deslogando usuarios inativos a cada 1 minuto
+setInterval(controleLogout, 60000)
 
 app.listen(PORT, ()=>console.log(chalk.green("servidor funcionando")));
