@@ -13,7 +13,7 @@ try{
     db = mongoClient.db("meu-banco")
     console.log(chalk.green("Banco de dados conectado"))
 }catch(e){
-    console.log(chalk.red("erro ao conectar ao banco de dados"))
+    console.log(chalk.red("erro ao conectar ao banco de dados: ", e))
 }
 
 export default db

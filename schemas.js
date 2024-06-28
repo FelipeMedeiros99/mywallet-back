@@ -12,3 +12,9 @@ export const usuarioSchema = Joi.object({
     "Senha": Joi.string().min(6).required()
 })
 
+export const transacaoSchema = Joi.object({
+    "Descricao": Joi.string().min(3).required(),
+    "Valor": Joi.number().precision(2).required(),
+})
+
+

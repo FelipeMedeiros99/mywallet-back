@@ -12,6 +12,8 @@ export default async function validacaoDeTokenMiddleware(req, res, next){
     try{
         // buscando token do usuário
         const validadeUsuario = await db.collection("mywallet-usuario-token").findOne({"Token": token})
+        
+        req["E-mail"] = validadeUsuario["E-mail"]
         // em caso de token expirado
         if(validadeUsuario===null){
             console.log("Token expirado");
