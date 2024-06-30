@@ -1,12 +1,11 @@
 import { Router } from "express"
 import validacaoDeTokenMiddleware from "../middlewares/verificacaoDeToken.js"
-import entradasController from "../controllers/entradasController.js"
+import transacoesController from "../controllers/transacoesController.js"
 
 const transacaoRouter = Router()
 
 // TODO: CRIAR FUNÇÃO QUE REPITA OS MESMOS PASSOS PARA A SAÍDA
 
-transacaoRouter.post("/entrada", validacaoDeTokenMiddleware, entradasController)
-transacaoRouter.post("/saida", validacaoDeTokenMiddleware)
+transacaoRouter.post("/transacao", validacaoDeTokenMiddleware, transacoesController)
 
 export default transacaoRouter

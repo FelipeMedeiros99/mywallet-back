@@ -5,7 +5,7 @@ import db from "../banco.js"
  */
 export default async function controleLogout(){
     const tempoAtual = Date.now()
-    const tempoMinimo = tempoAtual - (1000 * 60 *5)
+    const tempoMinimo = tempoAtual - (1000 * 60 *20)
     try{
         await db.collection("mywallet-usuario-token").deleteMany({Entrada: {$lt: tempoMinimo}})
     }catch(e){
