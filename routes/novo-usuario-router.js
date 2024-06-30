@@ -7,6 +7,6 @@ import emailJaCadastradoMiddleware from "../middlewares/emailJaCadastradoMiddlew
 const novoUsuarioRouter = Router();
 
 // rota de cadastro do novo usuário
-novoUsuarioRouter.post("/novo-usuario", emailJaCadastradoMiddleware, novoUsuarioPostController);
+novoUsuarioRouter.post("/cadastro", emailJaCadastradoMiddleware, novoUsuarioPostController);
 
 export default novoUsuarioRouter;

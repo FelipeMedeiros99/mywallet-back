@@ -13,3 +13,4 @@ export default async function restarTempoDeInatividadeMiddleware(req, res, next)
         res.status(400).send(`Erro ao resetar tempo de inatividade: ${e}`)
     }
 }
+

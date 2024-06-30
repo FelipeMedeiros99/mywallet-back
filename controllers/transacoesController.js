@@ -22,7 +22,8 @@ export default async function transacoesController(req, res){
             $push: {Entradas: {
                     "Descricao": informacoesEntrada.Descricao,
                     "Valor": informacoesEntrada.Valor,
-                    "Data": dataAtual()
+                    "Data": dataAtual(),
+                    "Id": Date.now()
                 }}}
         }else{
             atualizacao = {
@@ -30,7 +31,8 @@ export default async function transacoesController(req, res){
                 $push: {Saidas: {
                         "Descricao": informacoesEntrada.Descricao,
                         "Valor": informacoesEntrada.Valor,
-                        "Data": dataAtual()
+                        "Data": dataAtual(), 
+                        "Id": Date.now()
                     }}}
         }
         
@@ -38,7 +40,12 @@ export default async function transacoesController(req, res){
         await db.collection("mywallet-usuarios").updateOne({"E-mail": req["E-mail"]}, atualizacao)
         console.log("Dados atualizados com sucesso")
 
-        return res.sendStatus(201)
+        // buscando os dados atualizados para o usuário
+        const dadosAtualizados = await db.collection("mywallet-usuarios").findOne({"E-mail": req["E-mail"]})
+
+        delete dadosAtualizados.Senha
+
+        return res.status(201).send(dadosAtualizados)
         
     }catch(e){
         console.log("erro ao salvar transação: ", e)

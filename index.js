@@ -7,6 +7,7 @@ import novoUsuarioRouter from "./routes/novo-usuario-router.js"
 import loginRouter from "./routes/login-router.js"
 import controleLogout from "./utils/controleLogout.js"
 import transacaoRouter from "./routes/transacao-router.js"
+import deletarTransacaoRouter from "./routes/deletar-transacao.js"
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(json());
 app.use(novoUsuarioRouter);
 app.use(loginRouter);
 app.use(transacaoRouter);
+app.use(deletarTransacaoRouter);
 
 
 // deslogando usuarios inativos a cada 1 minuto
