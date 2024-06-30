@@ -80,10 +80,13 @@ o usuário terá uma response no formato:
   ]
 }
 
----------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 Para deletar uma transacao, deve enviar um "delete" para a rota "deletar" no formato:
 {
     "Id": 2984298429
 }
 
+será enviado os dados atualizados para o usuário
+
+-------------------------------------------------------------------------------------------

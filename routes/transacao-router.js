@@ -6,7 +6,6 @@ import resetarTempoDeInatividadeMiddleware from "../middlewares/resetarTempoDeIn
 
 const transacaoRouter = Router()
 
-// TODO: CRIAR FUNÇÃO QUE REPITA OS MESMOS PASSOS PARA A SAÍDA
 
 transacaoRouter.post("/transacao", validacaoDeTokenMiddleware, resetarTempoDeInatividadeMiddleware, transacoesController)
 
