@@ -1,30 +1,44 @@
+import { ReturnDocument } from "mongodb";
 import db from "../banco.js";
 import { editarTransacaoSchema } from "../schemas.js";
+import filtroErroSchemas from "../utils/filtroErroSchemas.js";
 
 // TODO: FAZER A ALTERAÇÃO DE DADOS NO BANCO DE DADOS
 
 export default async function editarTransacaoController(req, res){
     const {body} = req;
-    console.log("body: ", body)
+    
     try{
         // validando dados
         await editarTransacaoSchema.validateAsync(body, {abortEarly: false});
         
-        // buscando dados do usuário
-        let dadosDoBanco = await db.collection("mywallet-usuarios").findOne({"E-mail": req["E-mail"]})
+        const filtro = {
+            "E-mail": req["E-mail"],
+            [`${body["Tipo"]}.Id`]: body.Id
+        }
 
-        console.log("dados do banco: ", dadosDoBanco)
+        console.log("Filtro:", filtro)
         
-        console.log("Dados entrada: ", dadosDoBanco[`${body["Tipo"]}`])
+        const alteracao = {
+            $set:{
+                "Entradas.$.Descricao": body.Descricao,
+                "Entradas.$.Valor": body.Valor
+            }
+        }
+        
+        // Alterando elemento
+        const dados = await db.collection("mywallet-usuarios").findOneAndUpdate(filtro, alteracao, {returnDocument: "after"})
 
-        // console.log("Dados do banco: ", dadosDoBanco[body["Tipo"]])
+        // deletando dados restritos
+        delete dados.Senha
 
-
-        res.sendStatus(201)
+        // retornando dados atualizados
+        res.status(201).send(dados)
 
         
     }catch(e){
-        console.log("Erro ao editar transação");
-        res.status(400).send(`Erro ao editar transação: ${e}`);
+        const erros = filtroErroSchemas(e)
+        console.log("Erro ao editar transação: ", erros||e);
+        res.status(400).send(`Erro ao editar transação: ${erros||e}`);
     }
 }

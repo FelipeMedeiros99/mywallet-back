@@ -18,7 +18,7 @@ export const transacaoSchema = Joi.object({
 })
 
 export const editarTransacaoSchema = Joi.object({
-    "Tipo": Joi.valid("Entrada", "Saida").required(),
+    "Tipo": Joi.valid("Entradas", "Saidas").required(),
     "Descricao": Joi.string().min(3).required(),
     "Valor": Joi.number().precision(2).required(),
     "Id": Joi.number().min(13).required()
