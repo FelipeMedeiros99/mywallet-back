@@ -2,6 +2,7 @@ import bcrypt from "bcrypt"
 
 import db from "../banco.js";
 import { usuarioSchema } from "../schemas.js";
+import filtroErroSchemas from "../utils/filtroErroSchemas.js";
 
 /**
  * Validação se usuário existe no banco de dados
@@ -14,19 +15,17 @@ export async function usuarioExisteMiddleware(req, res, next){
         await usuarioSchema.validateAsync(dados);
         // buscando dados no banco
         const dadosUsuarioBanco = await db.collection("mywallet-usuarios").findOne({"E-mail": dados["E-mail"]});
-        
         // salvando nos dados temporários do middleware
         req.dadosUsuarioBanco = dadosUsuarioBanco;
-
         // retornando erro caso usuário não exista
         if(dadosUsuarioBanco === null){
             return res.status(401).send("Usuário não encontrado");
         }         
-        console.log("usuario encontrado")
+        console.log("usuario encontrado");
         next();
 
     }catch(e){
-        const erro = e.details?.map(e=>e.message);
+        const erro = filtroErroSchemas(e)
         console.log("erro ao localizar usuário: ", erro||e);
         return res.status(401).send(`Erro ao realizar login: ${erro||e}`);
     }
@@ -48,7 +47,7 @@ export async function senhaConfereMiddleware(req, res, next){
             return res.status(401).send("Senha incorreta");
         }
         // caso esteja correto, segue para o próximo middleware
-        console.log("senha aceita")
+        console.log("senha aceita");
         next();
 
     }catch(e){

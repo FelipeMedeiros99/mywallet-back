@@ -90,3 +90,13 @@ Para deletar uma transacao, deve enviar um "delete" para a rota "deletar" no for
 será enviado os dados atualizados para o usuário
 
 -------------------------------------------------------------------------------------------
+para editar os dados, deve ser enviado uma requisição put para /editar no formato:
+
+{
+  "Tipo": "Entradas",
+  "Descricao": "003",
+  "Valor": 100.0,
+  "Id": 1719713301711
+}
+
+será retornado os dados atualizados

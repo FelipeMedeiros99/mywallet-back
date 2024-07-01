@@ -1,14 +1,14 @@
-import chalk from "chalk"
-import express, { json } from "express"
-import dotenv from "dotenv"
-import cors from "cors"
+import chalk from "chalk";
+import express, { json } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 
-import novoUsuarioRouter from "./routes/novo-usuario-router.js"
-import loginRouter from "./routes/login-router.js"
-import controleLogout from "./utils/controleLogout.js"
-import transacaoRouter from "./routes/transacao-router.js"
-import deletarTransacaoRouter from "./routes/deletar-transacao.js"
-import editarTransacaoRouter from "./routes/editar-transacao.js"
+import novoUsuarioRouter from "./routes/novo-usuario-router.js";
+import loginRouter from "./routes/login-router.js";
+import controleLogout from "./utils/controleLogout.js";
+import transacaoRouter from "./routes/transacao-router.js";
+import deletarTransacaoRouter from "./routes/deletar-transacao.js";
+import editarTransacaoRouter from "./routes/editar-transacao.js";
 
 
 dotenv.config();

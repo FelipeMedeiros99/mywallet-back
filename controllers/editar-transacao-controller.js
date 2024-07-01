@@ -1,9 +1,7 @@
-import { ReturnDocument } from "mongodb";
 import db from "../banco.js";
 import { editarTransacaoSchema } from "../schemas.js";
 import filtroErroSchemas from "../utils/filtroErroSchemas.js";
 
-// TODO: FAZER A ALTERAÇÃO DE DADOS NO BANCO DE DADOS
 
 export default async function editarTransacaoController(req, res){
     const {body} = req;
