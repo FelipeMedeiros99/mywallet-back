@@ -26,5 +26,10 @@ export const editarTransacaoSchema = Joi.object({
 
 
 export const validaAuthorization = Joi.object({
-    "authorization": Joi.string().trim().regex(/^Bearer [a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}$/)
+    "authorization": Joi.string().trim().regex(/^Bearer [a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}$/).required()
+})
+
+
+export const validaIdTransacaoSchema = Joi.object({
+    "Id": Joi.number().min(1000000000000).required()
 })

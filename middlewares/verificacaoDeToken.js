@@ -13,9 +13,8 @@ export default async function validacaoDeTokenMiddleware(req, res, next){
         // validando header authorization
         const autorizacao = {"authorization": req.headers.authorization}
         await validaAuthorization.validateAsync(autorizacao, {abortEarly: false})
-
         // separando o token
-        const token = headers.authorization.split(" ")[1];
+        const token = headers.authorization?.split(" ")[1];
         req.token = token;
     
         // buscando token do usuário
@@ -25,7 +24,7 @@ export default async function validacaoDeTokenMiddleware(req, res, next){
         req.validadeUsuario = validadeUsuario;
 
         // salvando email de usuario         
-        req["E-mail"] = validadeUsuario["E-mail"];
+        req["E-mail"] = validadeUsuario["E-mail"].toLowerCase();
 
         // em caso de token expirado
         if(validadeUsuario===null){

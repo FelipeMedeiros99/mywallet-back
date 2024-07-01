@@ -1,4 +1,6 @@
 import db from "../banco.js";
+import { validaIdTransacaoSchema } from "../schemas.js";
+import filtroErroSchemas from "../utils/filtroErroSchemas.js";
 
 
 /**
@@ -8,13 +10,12 @@ export default async function deletarTransacaoController(req, res){
     const {body: dados} = req;
     try{
 
+        await validaIdTransacaoSchema.validateAsync(dados, {abortEarly: false})
+
         // deletando 
         const dadosAtualizados = await db.collection("mywallet-usuarios").findOneAndUpdate(
             {"E-mail": req["E-mail"]}, 
-            {
-                $pull: {Entradas: { "Id": dados.Id }},
-                $pull: {Saidas: {"Id": dados.Id}},
-            }, {returnDocument: "after"});
+            {$pull: {Entradas: { "Id": dados.Id }, Saidas: {"Id": dados.Id}}}, {returnDocument: "after"});
 
         // impedindo que a senha senha enviada
         delete dadosAtualizados["E-mail"];
@@ -23,7 +24,8 @@ export default async function deletarTransacaoController(req, res){
         // enviando os dados atualizados
         return res.status(200).send(dados);
     }catch(e){
-        console.log("Erro ao apagar transação: ", e);
-        res.status(400).send(`Erro ao apagar transação: ${e}`);
+        const erro = filtroErroSchemas(e)
+        console.log("Erro ao apagar transação: ", erro||e);
+        res.status(400).send(`Erro ao apagar transação: ${erro||e}`);
     }
 }

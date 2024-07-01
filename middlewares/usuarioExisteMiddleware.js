@@ -14,7 +14,7 @@ export async function usuarioExisteMiddleware(req, res, next){
         // validando se os dados foram enviados corretamente
         await usuarioSchema.validateAsync(dados);
         // buscando dados no banco
-        const dadosUsuarioBanco = await db.collection("mywallet-usuarios").findOne({"E-mail": dados["E-mail"]});
+        const dadosUsuarioBanco = await db.collection("mywallet-usuarios").findOne({"E-mail": dados["E-mail"].toLowerCase()});
         // salvando nos dados temporários do middleware
         req.dadosUsuarioBanco = dadosUsuarioBanco;
         // retornando erro caso usuário não exista

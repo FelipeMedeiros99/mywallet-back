@@ -5,20 +5,20 @@ import filtroErroSchemas from "../utils/filtroErroSchemas.js";
 
 export default async function editarTransacaoController(req, res){
     const {body} = req;
-    
+
     try{
         // validando dados
         await editarTransacaoSchema.validateAsync(body, {abortEarly: false});
         
         const filtro = {
             "E-mail": req["E-mail"],
-            [`${body["Tipo"]}.Id`]: body.Id
+            [`${body.Tipo}.Id`]: body.Id
         };
-   
+
         const alteracao = {
             $set:{
-                "Entradas.$.Descricao": body.Descricao,
-                "Entradas.$.Valor": body.Valor
+                [`${body.Tipo}.$.Descricao`]: body.Descricao,
+                [`${body.Tipo}.$.Valor`]: body.Valor
             }
         };
         
@@ -26,6 +26,7 @@ export default async function editarTransacaoController(req, res){
         const dados = await db.collection("mywallet-usuarios").findOneAndUpdate(filtro, alteracao, {returnDocument: "after"});
 
         // deletando dados restritos
+        delete dados["E-mail"]
         delete dados.Senha;
 
         // retornando dados atualizados

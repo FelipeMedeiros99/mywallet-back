@@ -42,6 +42,8 @@ export default async function transacoesController(req, res){
         console.log("Dados atualizados com sucesso");
 
         // removendo dados sensíveis
+        console.log(req["E-mail"])
+        console.log(dadosAtualizados)
         delete dadosAtualizados['E-mail'];
         delete dadosAtualizados.Senha;
 

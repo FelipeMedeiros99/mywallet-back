@@ -18,8 +18,10 @@ export async function novoUsuarioPostController(req, res){
         const senha = await bcrypt.hash(dados.Senha, 10);
         // Removendo redundancia
         delete dados.Confirmar;
+        
+        
         // Salvando usuário no banco
-        await db.collection("mywallet-usuarios").insertOne({...dados, "Senha": senha, Saldo: 0, Entradas: [], Saidas: []});
+        await db.collection("mywallet-usuarios").insertOne({...dados,"E-mail": dados["E-mail"].toLowerCase(), "Senha": senha, Saldo: 0, Entradas: [], Saidas: []});
         // Retornando para o usuário
         console.log("usuario cadastrado com sucesso");
         return res.sendStatus(200);
