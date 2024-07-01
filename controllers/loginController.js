@@ -19,7 +19,7 @@ export default async function criacaoDeToken(req, res){
         await db.collection("mywallet-usuario-token").insertOne(dadosDeAutenticacao);
         
         // deletando dados sensíveis
-        delete req.dadosUsuarioBanco.Email;
+        delete req.dadosUsuarioBanco["E-mail"];
         delete req.dadosUsuarioBanco.Senha;
 
         // Enviando os dados para o frontEnd

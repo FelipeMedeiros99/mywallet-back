@@ -13,25 +13,23 @@ export default async function editarTransacaoController(req, res){
         const filtro = {
             "E-mail": req["E-mail"],
             [`${body["Tipo"]}.Id`]: body.Id
-        }
-
-        console.log("Filtro:", filtro)
-        
+        };
+   
         const alteracao = {
             $set:{
                 "Entradas.$.Descricao": body.Descricao,
                 "Entradas.$.Valor": body.Valor
             }
-        }
+        };
         
         // Alterando elemento
-        const dados = await db.collection("mywallet-usuarios").findOneAndUpdate(filtro, alteracao, {returnDocument: "after"})
+        const dados = await db.collection("mywallet-usuarios").findOneAndUpdate(filtro, alteracao, {returnDocument: "after"});
 
         // deletando dados restritos
-        delete dados.Senha
+        delete dados.Senha;
 
         // retornando dados atualizados
-        res.status(201).send(dados)
+        res.status(201).send(dados);
 
         
     }catch(e){

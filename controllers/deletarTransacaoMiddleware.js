@@ -1,4 +1,4 @@
-import db from "../banco.js"
+import db from "../banco.js";
 
 
 /**
@@ -7,21 +7,21 @@ import db from "../banco.js"
 export default async function deletarTransacaoController(req, res){
     const {body: dados} = req;
     try{
+
         // deletando 
-        await db.collection("mywallet-usuarios").updateOne(
+        const dadosAtualizados = await db.collection("mywallet-usuarios").findOneAndUpdate(
             {"E-mail": req["E-mail"]}, 
-            {$pull: {Entradas: { "Id": dados.Id }}}
-        );
-
-        // enviando dados atualizados
-
-        const dadosAtualizados = await db.collection("mywallet-usuarios").findOne({"E-mail": req["E-mail"]})
+            {
+                $pull: {Entradas: { "Id": dados.Id }},
+                $pull: {Saidas: {"Id": dados.Id}},
+            }, {returnDocument: "after"});
 
         // impedindo que a senha senha enviada
-        delete dadosAtualizados.Senha
+        delete dadosAtualizados["E-mail"];
+        delete dadosAtualizados.Senha;
 
         // enviando os dados atualizados
-        return res.status(200).send(dados)
+        return res.status(200).send(dados);
     }catch(e){
         console.log("Erro ao apagar transação: ", e);
         res.status(400).send(`Erro ao apagar transação: ${e}`);
