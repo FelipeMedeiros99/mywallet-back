@@ -22,7 +22,7 @@ export default async function deletarTransacaoController(req, res){
         delete dadosAtualizados.Senha;
 
         // enviando os dados atualizados
-        return res.status(200).send(dados);
+        return res.status(200).send(dadosAtualizados);
     }catch(e){
         const erro = filtroErroSchemas(e)
         console.log("Erro ao apagar transação: ", erro||e);
