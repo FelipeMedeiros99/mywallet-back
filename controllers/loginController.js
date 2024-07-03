@@ -21,9 +21,8 @@ export default async function criacaoDeToken(req, res){
         // deletando dados sensíveis
         delete req.dadosUsuarioBanco["E-mail"];
         delete req.dadosUsuarioBanco.Senha;
-
         // Enviando os dados para o frontEnd
-        res.status(200).setHeader(`Authorization`, `Bearer ${token}`).send(req.dadosUsuarioBanco);
+        res.status(200).send({...req.dadosUsuarioBanco, token});
     
     }catch(e){
         // informações de erro
