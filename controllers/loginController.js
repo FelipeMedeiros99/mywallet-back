@@ -23,7 +23,8 @@ export default async function criacaoDeToken(req, res){
         delete req.dadosUsuarioBanco.Senha;
         // Enviando os dados para o frontEnd
         res.status(200).send({...req.dadosUsuarioBanco, token});
-    
+        // res.status(200).setHeader("Authorization", `Bearer ${token}`).send(req.dadosUsuarioBanco);
+        
     }catch(e){
         // informações de erro
         console.log("erro ao criação de token: ", e);
