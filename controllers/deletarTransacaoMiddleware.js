@@ -17,13 +17,6 @@ export default async function deletarTransacaoController(req, res){
             {"E-mail": req["E-mail"]}, 
             {$pull: {Entradas: { "Id": dados.Id }, Saidas: {"Id": dados.Id}}}, {returnDocument: "after"});
 
-        
-        let soma = 0
-        dadosAtualizados?.Entradas?.map((objeto)=>soma+=objeto.Valor)
-        dadosAtualizados?.Saidas?.map((objeto)=>soma+=objeto.Valor)
-        
-        dadosAtualizados = await db.collection("mywallet-usuarios").findOneAndUpdate({"E-mail": req["E-mail"]}, {returnDocument: "after"})
-        
 
         // impedindo que a senha senha enviada
         delete dadosAtualizados["E-mail"];
