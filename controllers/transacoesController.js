@@ -19,7 +19,6 @@ export default async function transacoesController(req, res){
         let atualizacao;
         if(informacoesEntrada.Valor>=0){
             atualizacao = {
-            $inc: {Saldo: informacoesEntrada.Valor}, 
             $push: {Entradas: {
                     "Descricao": informacoesEntrada.Descricao,
                     "Valor": informacoesEntrada.Valor,
@@ -28,7 +27,6 @@ export default async function transacoesController(req, res){
                 }}};
         }else{
             atualizacao = {
-                $inc: {Saldo: informacoesEntrada.Valor}, 
                 $push: {Saidas: {
                         "Descricao": informacoesEntrada.Descricao,
                         "Valor": informacoesEntrada.Valor,
